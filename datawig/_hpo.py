@@ -266,7 +266,8 @@ class _HPO:
         predicted_train = imputed_train[simple_imputer.output_column + '_imputed']
 
         if is_numeric_dtype(train_df[simple_imputer.output_column]):
-            hp['mse'] = mean_squared_error(true, predicted)
+            notna_test = true.notna()
+            hp['mse'] = mean_squared_error(true[notna_test], predicted[notna_test])
             hp['mse_train'] = mean_squared_error(true_train, predicted_train)
             confidence = float('nan')
         else:
