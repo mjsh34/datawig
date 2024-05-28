@@ -151,7 +151,7 @@ def evaluate_model_outputs_single_attribute(true, predicted, topMisclassificatio
 
     model_metrics = dict()
 
-    model_metrics['class_counts'] = [(a, int(b)) for a, b in labels.iteritems()]
+    model_metrics['class_counts'] = [(a, int(b)) for a, b in labels.items()]
 
     # computes statistics not weighted by class frequency
     model_metrics['avg_precision'] = precision_score(true, predicted, average='macro')

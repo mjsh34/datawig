@@ -25,8 +25,12 @@ import random
 import sys
 import time
 import string
-import collections
 from typing import Any, List, Tuple, Dict
+import collections
+if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+    from collections.abc import MutableMapping
+else:
+    from collections import MutableMapping
 
 import mxnet as mx
 import numpy as np
@@ -66,7 +70,7 @@ def flatten_dict(d: Dict,
     items = []
     for k, v in d.items():
         new_key = parent_key + sep + k if parent_key else k
-        if isinstance(v, collections.MutableMapping):
+        if isinstance(v, MutableMapping):
             items.extend(flatten_dict(v, new_key, sep=sep).items())
         else:
             items.append((new_key, v))
